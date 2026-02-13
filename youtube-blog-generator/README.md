@@ -109,6 +109,13 @@ docker build -t youtube-blog-gen .
 docker run -p 5001:5001 --env-file .env youtube-blog-gen
 ```
 
+**方式三：Render 一键部署 (最简单)**
+
+1. Fork 本仓库到你的 GitHub
+2. 在 Render.com 点击 **New +** -> **Blueprint**
+3. 选择你的仓库，Render 会自动读取 `render.yaml`
+4. 点击 **Apply** 即可自动部署
+
 Visit / 访问 **http://localhost:5001** 🎉
 
 ## 🏗️ 技术架构 / Architecture
