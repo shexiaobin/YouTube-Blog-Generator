@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: youtube-blog-generator
+    env: docker
+    plan: free
+
+    envVars:
+      - key: PORT
+        value: 5001
+      - key: PYTHONUNBUFFERED
+        value: 1
+      - key: CUSTOM_API_URL
+        sync: false
+      - key: CUSTOM_API_KEY
+        sync: false
+      - key: CUSTOM_API_MODEL
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
