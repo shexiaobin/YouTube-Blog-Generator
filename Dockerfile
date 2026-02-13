@@ -16,9 +16,6 @@ COPY requirements.txt .
 # Install python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install gunicorn for production
-RUN pip install gunicorn
-
 # Copy application code
 COPY . .
 
