@@ -152,7 +152,7 @@ def _get_video_info_ytdlp(video_url: str) -> Optional[dict]:
 def get_video_info(video_url: str) -> Optional[dict]:
     """
     Get detailed information about a single video.
-    Strategy: oEmbed API first (cloud-safe), then yt-dlp fallback.
+    Strategy: yt-dlp first (more complete data), oEmbed API fallback (cloud-safe).
     
     Args:
         video_url: YouTube video URL
@@ -160,15 +160,15 @@ def get_video_info(video_url: str) -> Optional[dict]:
     Returns:
         Video info dictionary or None
     """
-    # 1. Try oEmbed API first (lightweight, works on cloud IPs)
+    # 1. Try yt-dlp first (returns more complete data)
     print(f"📡 Fetching video info: {video_url}")
-    result = _get_video_info_oembed(video_url)
+    result = _get_video_info_ytdlp(video_url)
     if result:
         return result
     
-    # 2. Fallback to yt-dlp (may fail on Render/cloud IPs)
-    print(f"🔄 oEmbed failed, trying yt-dlp...")
-    result = _get_video_info_ytdlp(video_url)
+    # 2. Fallback to oEmbed API (lightweight, works on cloud IPs like Render)
+    print(f"🔄 yt-dlp failed, trying oEmbed API...")
+    result = _get_video_info_oembed(video_url)
     if result:
         return result
     
