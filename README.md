@@ -54,7 +54,7 @@
 
 ```bash
 # 1. Clone the repo / 克隆仓库
-git clone https://github.com/your-username/youtube-blog-generator.git
+git clone https://github.com/your-username/YouTube-Blog-Generator.git
 cd youtube-blog-generator
 
 # 2. Create virtual environment (recommended) / 创建虚拟环境（推荐）
