@@ -3,8 +3,7 @@ services:
     name: youtube-blog-generator
     env: docker
     plan: free
-    buildCommand: docker build -t youtube-blog-gen .
-    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120 app:app
+
     envVars:
       - key: PORT
         value: 5001
