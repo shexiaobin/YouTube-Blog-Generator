@@ -39,6 +39,11 @@ def get_channel_videos(channel_url: str, count: int = 10) -> List[Dict]:
         'quiet': True,
         'extract_flat': True,
         'playlist_items': f'1:{count}',
+        'nocheckcertificate': True,
+        'extractor_args': {'youtube': {'player_client': ['android', 'ios']}},
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        }
     }
     
     # Handle different URL formats
@@ -84,6 +89,11 @@ def get_video_info(video_url: str) -> Optional[dict]:
     ydl_opts = {
         'quiet': True,
         'skip_download': True,
+        'nocheckcertificate': True,
+        'extractor_args': {'youtube': {'player_client': ['android', 'ios']}},
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        }
     }
     
     try:
@@ -184,6 +194,11 @@ def get_video_transcript(video_url: str, language: str = 'zh') -> Optional[str]:
         'writeautomaticsub': True,
         'subtitleslangs': [language, 'en', 'zh-Hans', 'zh-Hant'],
         'subtitlesformat': 'vtt',
+        'nocheckcertificate': True,
+        'extractor_args': {'youtube': {'player_client': ['android', 'ios']}},
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        }
     }
     
     try:
