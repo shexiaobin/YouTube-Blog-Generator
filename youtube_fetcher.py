@@ -76,16 +76,48 @@ def get_channel_videos(channel_url: str, count: int = 10) -> List[Dict]:
         return []
 
 
-def get_video_info(video_url: str) -> Optional[dict]:
+def _get_video_info_oembed(video_url: str) -> Optional[dict]:
     """
-    Get detailed information about a single video.
+    Get video info using YouTube's public oEmbed API.
+    This endpoint is lightweight and NOT blocked by YouTube on cloud IPs.
+    """
+    import requests
     
-    Args:
-        video_url: YouTube video URL
+    video_id = extract_video_id(video_url)
+    if not video_id:
+        return None
+    
+    try:
+        canonical_url = f"https://www.youtube.com/watch?v={video_id}"
+        oembed_url = f"https://www.youtube.com/oembed?url={canonical_url}&format=json"
         
-    Returns:
-        Video info dictionary or None
-    """
+        resp = requests.get(oembed_url, timeout=10, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        })
+        
+        if resp.status_code == 200:
+            data = resp.json()
+            print(f"✅ oEmbed API success: {data.get('title', '')[:50]}")
+            return {
+                'id': video_id,
+                'title': data.get('title', 'Unknown'),
+                'description': '',  # oEmbed doesn't provide description
+                'url': canonical_url,
+                'thumbnail': f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg",
+                'duration': 0,
+                'channel': data.get('author_name', 'Unknown'),
+                'upload_date': '',
+            }
+        else:
+            print(f"⚠️ oEmbed API returned {resp.status_code}")
+    except Exception as e:
+        print(f"⚠️ oEmbed API error: {e}")
+    
+    return None
+
+
+def _get_video_info_ytdlp(video_url: str) -> Optional[dict]:
+    """Get video info using yt-dlp (may fail on cloud IPs)."""
     ydl_opts = {
         'quiet': True,
         'skip_download': True,
@@ -112,8 +144,35 @@ def get_video_info(video_url: str) -> Optional[dict]:
                     'upload_date': result.get('upload_date', ''),
                 }
     except Exception as e:
-        print(f"Error fetching video info: {e}")
+        print(f"⚠️ yt-dlp error: {e}")
     
+    return None
+
+
+def get_video_info(video_url: str) -> Optional[dict]:
+    """
+    Get detailed information about a single video.
+    Strategy: oEmbed API first (cloud-safe), then yt-dlp fallback.
+    
+    Args:
+        video_url: YouTube video URL
+        
+    Returns:
+        Video info dictionary or None
+    """
+    # 1. Try oEmbed API first (lightweight, works on cloud IPs)
+    print(f"📡 Fetching video info: {video_url}")
+    result = _get_video_info_oembed(video_url)
+    if result:
+        return result
+    
+    # 2. Fallback to yt-dlp (may fail on Render/cloud IPs)
+    print(f"🔄 oEmbed failed, trying yt-dlp...")
+    result = _get_video_info_ytdlp(video_url)
+    if result:
+        return result
+    
+    print(f"❌ All methods failed for: {video_url}")
     return None
 
 
