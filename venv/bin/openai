@@ -1,4 +1,4 @@
-#!/Users/Mayer/.gemini/antigravity/scratch/youtube-blog-generator/venv/bin/python3
+#!/Users/xiaobin.she/Documents/GitHub/YouTube-Blog-Generator/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
