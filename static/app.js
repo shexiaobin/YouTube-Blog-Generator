@@ -392,19 +392,29 @@ async function loadSettings() {
         const openaiInput = document.getElementById('settingsOpenaiKey');
         const geminiInput = document.getElementById('settingsGeminiKey');
         const groqInput = document.getElementById('settingsGroqKey');
+        const customUrlInput = document.getElementById('settingsCustomApiUrl');
+        const customKeyInput = document.getElementById('settingsCustomApiKey');
+        const customModelInput = document.getElementById('settingsCustomApiModel');
 
         openaiInput.value = '';
         geminiInput.value = '';
         groqInput.value = '';
+        customUrlInput.value = '';
+        customKeyInput.value = '';
+        customModelInput.value = '';
 
         openaiInput.placeholder = data.openai_api_key || 'sk-...';
         geminiInput.placeholder = data.gemini_api_key || 'AIza...';
         groqInput.placeholder = data.groq_api_key || 'gsk_...';
+        customUrlInput.placeholder = data.custom_api_url || 'https://api.example.com/v1';
+        customKeyInput.placeholder = data.custom_api_key || 'your-api-key';
+        customModelInput.placeholder = data.custom_api_model || 'model-name';
 
         // Key status indicators
         document.getElementById('openaiKeyStatus').textContent = data.has_openai ? '✅' : '';
         document.getElementById('geminiKeyStatus').textContent = data.has_gemini ? '✅' : '';
         document.getElementById('groqKeyStatus').textContent = data.has_groq ? '✅' : '';
+        document.getElementById('customApiStatus').textContent = data.has_custom_api ? '✅' : '';
 
         // TTS engine
         document.getElementById('settingsTtsEngine').value = data.tts_engine || 'edge';
@@ -436,11 +446,17 @@ async function saveSettings() {
     const openaiKey = document.getElementById('settingsOpenaiKey').value.trim();
     const geminiKey = document.getElementById('settingsGeminiKey').value.trim();
     const groqKey = document.getElementById('settingsGroqKey').value.trim();
+    const customApiUrl = document.getElementById('settingsCustomApiUrl').value.trim();
+    const customApiKey = document.getElementById('settingsCustomApiKey').value.trim();
+    const customApiModel = document.getElementById('settingsCustomApiModel').value.trim();
     const ttsEngine = document.getElementById('settingsTtsEngine').value;
 
     if (openaiKey) data.openai_api_key = openaiKey;
     if (geminiKey) data.gemini_api_key = geminiKey;
     if (groqKey) data.groq_api_key = groqKey;
+    if (customApiUrl) data.custom_api_url = customApiUrl;
+    if (customApiKey) data.custom_api_key = customApiKey;
+    if (customApiModel) data.custom_api_model = customApiModel;
     if (ttsEngine) data.tts_engine = ttsEngine;
 
     if (Object.keys(data).length === 0) {

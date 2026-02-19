@@ -273,9 +273,13 @@ def get_settings():
         'openai_api_key': config.mask_key(config.OPENAI_API_KEY),
         'gemini_api_key': config.mask_key(config.GEMINI_API_KEY),
         'groq_api_key': config.mask_key(config.GROQ_API_KEY),
+        'custom_api_url': config.CUSTOM_API_URL if config.CUSTOM_API_URL else '',
+        'custom_api_key': config.mask_key(config.CUSTOM_API_KEY),
+        'custom_api_model': config.CUSTOM_API_MODEL if config.CUSTOM_API_MODEL else '',
         'tts_engine': config.TTS_ENGINE,
         'tts_voice': config.TTS_VOICE,
         'summarizer': config.SUMMARIZER,
+        'has_custom_api': config.has_custom_api(),
         'has_openai': config.has_openai(),
         'has_gemini': config.has_gemini(),
         'has_groq': config.has_groq(),
@@ -297,6 +301,12 @@ def save_settings():
         updates['GEMINI_API_KEY'] = data['gemini_api_key']
     if data.get('groq_api_key'):
         updates['GROQ_API_KEY'] = data['groq_api_key']
+    if data.get('custom_api_url'):
+        updates['CUSTOM_API_URL'] = data['custom_api_url']
+    if data.get('custom_api_key'):
+        updates['CUSTOM_API_KEY'] = data['custom_api_key']
+    if data.get('custom_api_model'):
+        updates['CUSTOM_API_MODEL'] = data['custom_api_model']
     if data.get('tts_engine'):
         updates['TTS_ENGINE'] = data['tts_engine']
     if data.get('tts_voice'):
@@ -310,6 +320,7 @@ def save_settings():
         'success': True,
         'message': '设置已保存',
         'summarizer': config.SUMMARIZER,
+        'has_custom_api': config.has_custom_api(),
         'has_openai': config.has_openai(),
         'has_gemini': config.has_gemini(),
         'has_groq': config.has_groq(),

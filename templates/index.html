@@ -148,6 +148,34 @@
 
                 <hr class="settings-divider">
 
+                <!-- Custom API Section -->
+                <div class="settings-section">
+                    <h3>🌐 自定义 API（最高优先级）</h3>
+                    <p class="settings-desc">配置兼容 OpenAI 格式的自定义 API 端点（留空则不修改已有配置）</p>
+
+                    <div class="input-group">
+                        <label>API 地址</label>
+                        <div class="input-with-status">
+                            <input type="text" id="settingsCustomApiUrl" placeholder="https://api.example.com/v1">
+                            <span class="key-status" id="customApiStatus"></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>API Key</label>
+                        <div class="input-with-status">
+                            <input type="password" id="settingsCustomApiKey" placeholder="your-api-key">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>模型名称</label>
+                        <div class="input-with-status">
+                            <input type="text" id="settingsCustomApiModel" placeholder="gpt-4o / gemini-pro / ...">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="settings-divider">
+
                 <!-- API Keys Section -->
                 <div class="settings-section">
                     <h3>🔑 API Keys</h3>
