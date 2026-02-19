@@ -6,13 +6,35 @@
     Transform YouTube videos into blog posts & audio podcasts with AI
   </p>
   <p align="center">
+    <a href="https://aigenerator.zeabur.app/">🌐 在线演示 Live Demo</a> •
     <a href="#-快速开始--quick-start">快速开始 Quick Start</a> •
     <a href="#-功能特性--features">功能 Features</a> •
     <a href="#-技术架构--architecture">架构 Architecture</a> •
-    <a href="#-api-文档--api-docs">API Docs</a> •
-    <a href="#-贡献指南--contributing">贡献 Contributing</a>
+    <a href="#-api-文档--api-docs">API Docs</a>
   </p>
 </p> 
+
+---
+
+## 📖 项目背景 / Background
+
+YouTube 上有大量高质量的英文视频内容，涵盖科技、商业、自我提升等领域。然而，语言障碍让很多中文用户无法高效消化这些优质知识。手动翻译耗时费力，而机翻字幕又常常生硬难懂。
+
+There are tons of high-quality English videos on YouTube covering tech, business, self-improvement and more. However, the language barrier prevents many Chinese-speaking users from efficiently absorbing this knowledge. Manual translation is time-consuming, and auto-translated subtitles are often awkward and hard to follow.
+
+**YouTube Blog Generator** 正是为了解决这个痛点而生：
+
+**YouTube Blog Generator** was built to solve this exact problem:
+
+1. 🎯 **自动提取**英文视频的字幕内容 / **Auto-extract** subtitles from English videos
+2. 🤖 **AI 深度翻译 + 分析**，生成流畅自然的中文博客文章，而非逐句机翻 / **AI-powered translation & analysis**, generating natural Chinese blog posts instead of line-by-line machine translation
+3. 🎤 **语音合成**将博客转为中文播客音频，随时随地收听 / **Text-to-Speech** converts blogs into Chinese audio podcasts for on-the-go listening
+
+无论你是想紧跟海外科技趋势的开发者，还是希望高效获取英文知识的学习者，这个工具都能帮你**将英文视频知识转化为可阅读、可收听、可回顾的中文博客资产**。
+
+Whether you're a developer keeping up with global tech trends, or a learner seeking efficient access to English-language knowledge, this tool helps you **transform English video content into readable, listenable, and reviewable Chinese blog assets**.
+
+> 🌐 **在线体验 / Live Demo：** [https://aigenerator.zeabur.app/](https://aigenerator.zeabur.app/)
 
 ---
 
