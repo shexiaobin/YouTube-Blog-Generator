@@ -31,6 +31,7 @@ youtube-blog-generator/
 │   └── blogs.json      # Blog Metadata DB / 博客元数据数据库
 ├── requirements.txt    # Python Dependencies / Python 依赖
 ├── Dockerfile          # Docker Configuration / Docker 配置
+├── .dockerignore       # Docker Build Exclusions / Docker 构建排除文件
 └── .env.example        # Env Example / 环境变量示例
 ```
 
@@ -65,14 +66,21 @@ Loads environment variables and manages global configuration.
 | Config / 配置项 | Description / 说明 | Default / 默认值 |
 |--------|------|--------|
 | `OPENAI_API_KEY` | OpenAI API Key / 密钥 | None (from .env) |
+| `GEMINI_API_KEY` | Google Gemini API Key / 密钥 | None |
+| `GROQ_API_KEY` | Groq API Key / 密钥 | None |
+| `CUSTOM_API_URL` | Custom API Endpoint / 自定义 API 地址 | None |
 | `CUSTOM_API_KEY` | Custom API Key / 自定义密钥 | None |
+| `CUSTOM_API_MODEL` | Custom API Model / 自定义模型名 | None |
 | `TTS_ENGINE` | TTS Engine / 引擎选择 | `"edge"` |
 | `TTS_VOICE` | Edge TTS Voice / 声音 | `"zh-CN-XiaoxiaoNeural"` |
-| `SUMMARIZER` | Summary Engine / 摘要引擎 | `"custom"` >> `"openai"` >> `"local"` |
+| `SUMMARIZER` | Summary Engine / 摘要引擎 | `"custom"` >> `"openai"` >> `"gemini"` >> `"groq"` >> `"local"` |
 
 **Key Functions / 关键函数：**
 - `has_custom_api()` - Check if Custom API is configured / 检查是否配置了 Custom API
 - `has_openai()` - Check if OpenAI is configured / 检查是否配置了 OpenAI
+- `has_gemini()` - Check if Gemini is configured (API Key or OAuth) / 检查是否配置了 Gemini
+- `has_groq()` - Check if Groq is configured / 检查是否配置了 Groq
+- `reload_config()` - Hot-reload config from .env / 从 .env 热重载配置
 
 ---
 
@@ -113,6 +121,8 @@ Converts video transcripts into structured blog posts.
 | `generate_blog(title, transcript, channel)` | Main entry, auto-selects best method / 主入口，自动选择最佳方式 |
 | `summarize_with_custom_api(...)` | Use Custom API (Gemini 3 Pro etc) / 使用自定义 API 生成 |
 | `summarize_with_openai(...)` | Use OpenAI GPT-4o-mini / 使用 OpenAI 生成 |
+| `summarize_with_gemini(...)` | Use Google Gemini / 使用 Gemini 生成 |
+| `summarize_with_groq(...)` | Use Groq (Llama 3) / 使用 Groq 生成 |
 | `summarize_simple(...)` | Simple formatting (fallback) / 无 API 时的简单格式化 |
 
 #### AI Blog Structure / AI 生成的博客结构
@@ -237,8 +247,15 @@ cp .env.example .env
 python3 app.py
 
 # Docker
+docker build -t youtube-blog-gen .
 docker run -p 5001:5001 --env-file .env youtube-blog-gen
 ```
+
+### Zeabur Deployment / Zeabur 部署
+1. Fork repo to your GitHub / Fork 仓库
+2. Login [Zeabur.com](https://zeabur.com) with GitHub / GitHub 登录
+3. Create Project → Add Service → GitHub → Select repo / 选择仓库
+4. Auto-build & Generate Domain / 自动构建后生成域名
 
 Visit / 访问 **http://localhost:5001**
 

@@ -54,7 +54,7 @@
 
 ```bash
 # 1. Clone the repo / 克隆仓库
-git clone https://github.com/your-username/youtube-blog-generator.git
+git clone https://github.com/shexiaobin/YouTube-Blog-Generator.git
 cd youtube-blog-generator
 
 # 2. Create virtual environment (recommended) / 创建虚拟环境（推荐）
@@ -99,7 +99,7 @@ cp .env.example .env
 python3 app.py
 ```
 
-**方式二：Docker 运行 (推荐)**
+**方式二：Docker 运行**
 
 ```bash
 # Build image
@@ -109,12 +109,13 @@ docker build -t youtube-blog-gen .
 docker run -p 5001:5001 --env-file .env youtube-blog-gen
 ```
 
-**方式三：Render 一键部署 (最简单)**
+**方式三：Zeabur 一键部署 (推荐)**
 
 1. Fork 本仓库到你的 GitHub
-2. 在 Render.com 点击 **New +** -> **Blueprint**
-3. 选择你的仓库，Render 会自动读取 `render.yaml`
-4. 点击 **Apply** 即可自动部署
+2. 在 [Zeabur.com](https://zeabur.com) 用 GitHub 登录
+3. Create Project → Add Service → GitHub → 选择本仓库
+4. 等待自动构建完成，Generate Domain 即可访问
+5. 在 Variables 中配置 API Keys（可选）
 
 Visit / 访问 **http://localhost:5001** 🎉
 
@@ -142,8 +143,10 @@ youtube-blog-generator/
 ├── static/
 │   ├── app.js            # Frontend logic & OAuth handling
 │   └── style.css         # Styles
+├── Dockerfile            # Docker container configuration
+├── .dockerignore         # Docker build exclusions
 ├── requirements.txt      # Python dependencies
-└── .env                  # Environment variables
+└── .env                  # Environment variables (create from .env.example)
 ```
 
 ### 技术栈 / Tech Stack
@@ -223,7 +226,7 @@ Contributions are welcome! 欢迎贡献！
 - 📦 Batch video processing / 批量处理
 - ⏰ Scheduled auto-fetch / 定时自动抓取
 - 👤 User accounts & personal blog library / 用户系统
-- 🐳 Docker deployment / Docker 部署
+- 📊 Analytics dashboard / 数据分析面板
 
 ## 📄 License
 
